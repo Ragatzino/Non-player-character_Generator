@@ -7,29 +7,23 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  TextField
+  TextField,
+  MenuItem
 } from "@material-ui/core/";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import withStyles from "@material-ui/styles/withStyles";
 import theme from "../../Theme";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {
-  addPony,
-  setPony,
-  fetchRandomPony
-} from "../../redux/Poney/poneyAction";
 import PropTypes from "prop-types";
+import * as poneyReducer from "../../redux/Poney/index";
+import * as raceReducer from "../../redux/Races/index";
 
 class FormDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      name: "",
-      level: "",
-      race: "",
-      src: ""
+      poney: { name: "", race: "", level: "", src: "" }
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -43,15 +37,19 @@ class FormDialog extends React.Component {
     this.setState({ open: false });
   }
 
-  handleChange = (name, pony) => event => {
-    const { setPony } = this.props;
-    pony[event.target.name] = event.target.value;
-    setPony({ pony });
+  handleChange = name => event => {
+    const { setPony, pony } = this.props;
+    pony[name] = event.target.value;
+    setPony(pony);
+    this.setState({ poney: pony });
   };
+
   // Recupère un poney random depuis l'api et affecte les valeurs a l'ihm
-  handleRandomClick = pony => {
-    const { fetchRandomPony } = this.props;
+  // issue rerender
+  handleRandomClick = () => {
+    const { fetchRandomPony, pony } = this.props;
     fetchRandomPony();
+    this.setState({ poney: pony });
   };
 
   handleSubmit = pony => {
@@ -67,11 +65,8 @@ class FormDialog extends React.Component {
     addPony(pony);
     this.setState({ open: false });
   };
-  componentWillUnmount = () => {
-    fetchRandomPony(true);
-  };
   render() {
-    const { children, classes, pony } = this.props;
+    const { children, classes, pony, races } = this.props;
     return (
       <React.Fragment>
         {React.cloneElement(children, { onClick: this.handleClickOpen })}
@@ -92,31 +87,45 @@ class FormDialog extends React.Component {
               className={classes.margin}
               label="Nom"
               variant="outlined"
-              onChange={this.handleChange("name", pony)}
-              value={pony.name}
+              onChange={this.handleChange("name")}
+              value={this.state.poney.name}
               autoFocus
             />
             <CssTextField
+              id="Espèces"
               className={classes.margin}
               label="Espèce"
               variant="outlined"
-              onChange={this.handleChange("race", pony)}
-              value={pony.race}
-            />
+              select
+              value={this.state.poney.race}
+              onChange={this.handleChange("race")}
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu
+                }
+              }}
+              margin="normal"
+            >
+              {races.map(option => (
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
+                </MenuItem>
+              ))}
+            </CssTextField>
             <CssTextField
               className={classes.margin}
               label="Niveau"
               variant="outlined"
-              onChange={this.handleChange("level", pony)}
-              value={pony.level}
+              onChange={this.handleChange("level")}
+              value={this.state.poney.level}
             />
             <CssTextField
               className={classes.margin}
               label="Image"
               variant="outlined"
               helperText="src"
-              onChange={this.handleChange("src", pony)}
-              value={pony.src}
+              onChange={this.handleChange("src")}
+              value={this.state.poney.src}
             />
           </DialogContent>
           <DialogActions>
@@ -133,8 +142,7 @@ class FormDialog extends React.Component {
             {
               //Pareil
             }
-            {pony.src !== undefined &&
-            pony.race !== undefined &&
+            {pony.race !== undefined &&
             pony.name !== undefined &&
             pony.level !== undefined ? (
               <Tooltip title="Ajouter un nouveau poney ">
@@ -179,7 +187,11 @@ const styles = {
     float: "right"
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: 200
+  },
+  menu: {
+    width: 200
   }
 };
 
@@ -205,15 +217,27 @@ const CssTextField = withStyles({
   }
 })(TextField);
 
-const mapStateToProps = ({ poneyReducer }) => {
+const mapDispatchToProps = dispatch => {
   return {
-    ponies: poneyReducer.ponies,
-    pony: poneyReducer.pony
+    setPony: pony => {
+      dispatch(poneyReducer.setPony(pony));
+    },
+    fetchRandomPony: () => {
+      dispatch(poneyReducer.fetchRandomPony());
+    },
+    addPony: () => {
+      dispatch(poneyReducer.addPony());
+    }
   };
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addPony, setPony, fetchRandomPony }, dispatch);
+const mapStateToProps = state => {
+  return {
+    ponies: state.poneyReducer.ponies,
+    races: state.raceReducer.races,
+    pony: state.poneyReducer.pony
+  };
+};
 
 export default withStyles(styles)(
   connect(
@@ -221,7 +245,3 @@ export default withStyles(styles)(
     mapDispatchToProps
   )(FormDialog)
 );
-
-DialogContent.propTypes = {
-  pony: PropTypes.object.isRequired
-};

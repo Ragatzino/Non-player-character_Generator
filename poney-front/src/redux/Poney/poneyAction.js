@@ -12,6 +12,12 @@ export const setPony = pony => {
   };
 };
 
+export const updatePony = pony => {
+  return {
+    type: "UPDATE_PONY",
+    pony
+  };
+};
 export const addPony = pony => {
   return {
     type: "ADD_PONY",
@@ -39,11 +45,11 @@ export const fetchPonyById = name => {
   };
 };
 
-export const postPonies = ponies => {
+export const postPony = pony => {
   return (dispatch, getState) => {
     fetch(
-      "http://localhost:8080/characters",
-      this.state.ponies,
+      "http://localhost:8080/creation",
+      this.state.pony,
       {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -55,7 +61,7 @@ export const postPonies = ponies => {
         },
         redirect: "follow", // manual, *follow, error
         referrer: "no-referrer", // no-referrer, *client
-        body: JSON.stringify(setPonies)
+        body: JSON.stringify(setPony)
       }.then(response => response.json())
     );
   };
