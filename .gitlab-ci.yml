@@ -9,15 +9,8 @@ variables:
   GROUP_ID: /coding-dojo-sndio
   
 stages:
-  - test
   - build
   - deploy
-  
-helloworld:
-  stage: test
-  script:
-    - echo "Hello world"
-    - ls
 
 packagejs:
   stage: build
