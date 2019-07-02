@@ -25,6 +25,7 @@ packagejs:
     - shell
   script:
     - 'cd poney-front/'
+    - 'npm install'
     - "docker build -t $DOCKER_TAG_JS ."
     - "docker push $DOCKER_TAG_JS"
 
