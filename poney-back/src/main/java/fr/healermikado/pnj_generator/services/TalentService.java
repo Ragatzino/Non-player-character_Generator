@@ -19,7 +19,6 @@ import fr.healermikado.pnj_generator.entity.Talent;
  * TalentService
  */
 @Service
-
 public class TalentService {
     @Autowired
     private LevelService levelService;
@@ -72,19 +71,20 @@ public class TalentService {
     }
 
     public LevelService getLevelService() {
-        return this.levelService;
+        return levelService;
     }
 
     public void setLevelService(LevelService levelService) {
         this.levelService = levelService;
     }
 
-    public ITalentDao getITalentDao() {
-        return this.iTalentDao;
+    public ITalentDao getiTalentDao() {
+        return iTalentDao;
     }
 
-    public void setITalentDao(ITalentDao iTalentDao) {
+    public void setiTalentDao(ITalentDao iTalentDao) {
         this.iTalentDao = iTalentDao;
     }
 
+    
 }

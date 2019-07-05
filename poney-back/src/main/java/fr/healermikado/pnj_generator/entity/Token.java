@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
 /**
  * Name
  */
@@ -24,16 +26,9 @@ public class Token {
     @Column(name = "token")
     private String token;
 
-    public Token() {
-    }
-
-    public Token(Long id, String token) {
-        this.id = id;
-        this.token = token;
-    }
-
+    
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -41,44 +36,12 @@ public class Token {
     }
 
     public String getToken() {
-        return this.token;
+        return token;
     }
 
     public void setToken(String token) {
         this.token = token;
     }
 
-    public Token id(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Token token(String token) {
-        this.token = token;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Token)) {
-            return false;
-        }
-        Token token = (Token) o;
-        return Objects.equals(id, token.id) && Objects.equals(token, token.token);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, token);
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", token='" + getToken() + "'" +
-            "}";
-    }
+    
 }

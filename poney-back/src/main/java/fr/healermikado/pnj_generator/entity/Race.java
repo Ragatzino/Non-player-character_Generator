@@ -60,21 +60,8 @@ public class Race {
         return allTalents;
     }
 
-
-        public Race() {
-        }
-
-        public Race(Long idRace, String name, List<RaceImage> images, Set<Talent> specificTalents, Set<Token> possibleToken, Set<Talent> genericTalents) {
-                this.idRace = idRace;
-                this.name = name;
-                this.images = images;
-                this.specificTalents = specificTalents;
-                this.possibleToken = possibleToken;
-                this.genericTalents = genericTalents;
-        }
-
         public Long getIdRace() {
-                return this.idRace;
+                return idRace;
         }
 
         public void setIdRace(Long idRace) {
@@ -82,7 +69,7 @@ public class Race {
         }
 
         public String getName() {
-                return this.name;
+                return name;
         }
 
         public void setName(String name) {
@@ -90,7 +77,7 @@ public class Race {
         }
 
         public List<RaceImage> getImages() {
-                return this.images;
+                return images;
         }
 
         public void setImages(List<RaceImage> images) {
@@ -98,7 +85,7 @@ public class Race {
         }
 
         public Set<Talent> getSpecificTalents() {
-                return this.specificTalents;
+                return specificTalents;
         }
 
         public void setSpecificTalents(Set<Talent> specificTalents) {
@@ -106,7 +93,7 @@ public class Race {
         }
 
         public Set<Token> getPossibleToken() {
-                return this.possibleToken;
+                return possibleToken;
         }
 
         public void setPossibleToken(Set<Token> possibleToken) {
@@ -114,70 +101,11 @@ public class Race {
         }
 
         public Set<Talent> getGenericTalents() {
-                return this.genericTalents;
+                return genericTalents;
         }
 
         public void setGenericTalents(Set<Talent> genericTalents) {
                 this.genericTalents = genericTalents;
         }
-
-        public Race idRace(Long idRace) {
-                this.idRace = idRace;
-                return this;
-        }
-
-        public Race name(String name) {
-                this.name = name;
-                return this;
-        }
-
-        public Race images(List<RaceImage> images) {
-                this.images = images;
-                return this;
-        }
-
-        public Race specificTalents(Set<Talent> specificTalents) {
-                this.specificTalents = specificTalents;
-                return this;
-        }
-
-        public Race possibleToken(Set<Token> possibleToken) {
-                this.possibleToken = possibleToken;
-                return this;
-        }
-
-        public Race genericTalents(Set<Talent> genericTalents) {
-                this.genericTalents = genericTalents;
-                return this;
-        }
-
-        @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Race)) {
-            return false;
-        }
-        Race race = (Race) o;
-        return Objects.equals(idRace, race.idRace) && Objects.equals(name, race.name) && Objects.equals(images, race.images) && Objects.equals(specificTalents, race.specificTalents) && Objects.equals(possibleToken, race.possibleToken) && Objects.equals(genericTalents, race.genericTalents);
-        }
-
-        @Override
-        public int hashCode() {
-                return Objects.hash(idRace, name, images, specificTalents, possibleToken, genericTalents);
-        }
-
-        @Override
-        public String toString() {
-                return "{" +
-                        " idRace='" + getIdRace() + "'" +
-                        ", name='" + getName() + "'" +
-                        ", images='" + getImages() + "'" +
-                        ", specificTalents='" + getSpecificTalents() + "'" +
-                        ", possibleToken='" + getPossibleToken() + "'" +
-                        ", genericTalents='" + getGenericTalents() + "'" +
-                        "}";
-        }
-
 
 }

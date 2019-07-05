@@ -9,15 +9,8 @@ variables:
   GROUP_ID: /coding-dojo-sndio
   
 stages:
-  - test
   - build
   - deploy
-  
-helloworld:
-  stage: test
-  script:
-    - echo "Hello world"
-    - ls
 
 packagejs:
   stage: build
@@ -25,6 +18,8 @@ packagejs:
     - shell
   script:
     - 'cd poney-front/'
+    - 'npm install'
+    - "npm run build"
     - "docker build -t $DOCKER_TAG_JS ."
     - "docker push $DOCKER_TAG_JS"
 

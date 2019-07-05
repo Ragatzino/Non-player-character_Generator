@@ -23,6 +23,23 @@ public class Talent {
    
     @Column
     private String nom;
+
+    public Long getIdTalent() {
+        return idTalent;
+    }
+
+    public void setIdTalent(Long idTalent) {
+        this.idTalent = idTalent;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     
 
 

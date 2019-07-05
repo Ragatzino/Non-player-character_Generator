@@ -7,11 +7,6 @@ import java.util.stream.Collectors;
 import fr.healermikado.pnj_generator.entity.CharacterEntity;
 import fr.healermikado.pnj_generator.entity.Level;
 import fr.healermikado.pnj_generator.entity.Race;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Character
@@ -22,7 +17,7 @@ public class CharacterDto {
     // The name of the pony
     private String name;
 
-    // The string representation of the race of the pony 
+    // The string representation of the race of the pony
     private String race;
 
     // The level of the pony
@@ -39,43 +34,28 @@ public class CharacterDto {
 
     // The charm level
     private Level charmLevel;
-    
+
     // The rouce image
     private String src;
 
-    //The default list
+    // The default list
     private Set<String> quirks;
     
     public CharacterDto() {
     }
 
-    public CharacterDto(String name, Race race, int level) {
-        this.name = name;
-        this.race = race.getName();
-        this.level = level;
-    }
-
-    public CharacterDto(String name, String race, int level, String src) {
-        this.name = name;
-        this.race = race;
-        this.level = level;
-        this.src = src;
-    }
-
-    public CharacterDto(CharacterEntity alreadyMadeEntity) {
-
-        this.name = alreadyMadeEntity.getName();
-        this.level = alreadyMadeEntity.getLevel();
-        this.race = alreadyMadeEntity.getRace().getName();
-        this.src = alreadyMadeEntity.getSrc();
-        this.quirks = alreadyMadeEntity.getQuirks().stream().map(q-> q.getValue()).collect(Collectors.toSet());
-        this.bodyLevel = alreadyMadeEntity.getBodyLevel();
-        this.mindLevel = alreadyMadeEntity.getMindLevel();
-        this.charmLevel = alreadyMadeEntity.getCharmLevel();
-        
-    }
-
-
+    /**
+     * Full arg constructor
+     * @param name
+     * @param race
+     * @param level
+     * @param talents
+     * @param bodyLevel
+     * @param mindLevel
+     * @param charmLevel
+     * @param src
+     * @param quirks
+     */
     public CharacterDto(String name, String race, int level, Map<String, Level> talents, Level bodyLevel,
             Level mindLevel, Level charmLevel, String src, Set<String> quirks) {
         this.name = name;
@@ -89,6 +69,23 @@ public class CharacterDto {
         this.quirks = quirks;
     }
 
+    public CharacterDto(String name, Race race, int level) {
+        this.name = name;
+        this.race = race.getName();
+        this.level = level;
+    }
+
+    public CharacterDto(CharacterEntity alreadyMadeEntity) {
+
+        this.name = alreadyMadeEntity.getName();
+        this.level = alreadyMadeEntity.getLevel();
+        this.race = alreadyMadeEntity.getRace().getName();
+        this.src = alreadyMadeEntity.getSrc();
+        this.quirks = alreadyMadeEntity.getQuirks().stream().map(q -> q.getValue()).collect(Collectors.toSet());
+        this.bodyLevel = alreadyMadeEntity.getBodyLevel();
+        this.mindLevel = alreadyMadeEntity.getMindLevel();
+        this.charmLevel = alreadyMadeEntity.getCharmLevel();
+    }
 
     public String getName() {
         return name;
@@ -162,5 +159,11 @@ public class CharacterDto {
         this.quirks = quirks;
     }
 
+    @Override
+    public String toString() {
+        return "CharacterDto [bodyLevel=" + bodyLevel + ", charmLevel=" + charmLevel + ", level=" + level
+                + ", mindLevel=" + mindLevel + ", name=" + name + ", quirks=" + quirks + ", race=" + race + ", src="
+                + src + ", talents=" + talents + "]";
+    }
 
 }

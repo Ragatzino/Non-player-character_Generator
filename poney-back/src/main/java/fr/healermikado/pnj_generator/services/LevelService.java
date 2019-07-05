@@ -30,21 +30,18 @@ public class LevelService {
         return (levelToTest < levels.size() - 1);
     }
 
-
-    public ILevelDao getILevelDao() {
-        return this.iLevelDao;
-    }
-
-    public void setILevelDao(ILevelDao iLevelDao) {
-        this.iLevelDao = iLevelDao;
-    }
-
+    /**
+     * @return the levels
+     */
     public List<Level> getLevels() {
-        return this.levels;
+        return levels;
     }
 
-    public void setLevels(List<Level> levels) {
-        this.levels = levels;
+    /**
+     * @return the iLevelDao
+     */
+    public ILevelDao getiLevelDao() {
+        return iLevelDao;
     }
- 
+
 }

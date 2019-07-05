@@ -13,12 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
  * AlreadyMadeEntity
  * 
@@ -63,11 +57,6 @@ public class CharacterEntity {
     @ManyToOne()
     @JoinColumn(name="lvl_charm", referencedColumnName = "lvl")    
     private Level charmLevel;
-
-    public static String getIdQuirk() {
-        return ID_QUIRK;
-    }
-
     public Long getId() {
         return id;
     }

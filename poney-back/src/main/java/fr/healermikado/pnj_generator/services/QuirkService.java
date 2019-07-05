@@ -48,4 +48,14 @@ public class QuirkService {
     }
 
 
+    public IQuirkDao getiQuirkDao() {
+        return iQuirkDao;
+    }
+
+    public void setiQuirkDao(IQuirkDao iQuirkDao) {
+        this.iQuirkDao = iQuirkDao;
+    }
+
+    
+
 }

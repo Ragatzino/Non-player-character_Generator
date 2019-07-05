@@ -26,14 +26,13 @@ public class RaceService {
         return iRaceDao.findAll();
     }
 
-
-
-    public IRaceDao getIRaceDao() {
-        return this.iRaceDao;
+    public IRaceDao getiRaceDao() {
+        return iRaceDao;
     }
 
-    public void setIRaceDao(IRaceDao iRaceDao) {
+    public void setiRaceDao(IRaceDao iRaceDao) {
         this.iRaceDao = iRaceDao;
     }
+    
     
 }

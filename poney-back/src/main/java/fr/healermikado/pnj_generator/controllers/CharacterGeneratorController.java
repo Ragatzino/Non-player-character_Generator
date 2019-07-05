@@ -24,7 +24,6 @@ import fr.healermikado.pnj_generator.services.CharacterService;
  */
 @RestController
 @RequestMapping(produces = "application/json;charset=UTF-8")
-@CrossOrigin(origins = "http://localhost:3000")
 public class CharacterGeneratorController {
 	private Logger logger = LoggerFactory.getLogger(CharacterGeneratorController.class);
 
@@ -48,13 +47,13 @@ public class CharacterGeneratorController {
 	}
 
 
-	@GetMapping(value = "character/{id}")
+	@GetMapping(value = "/character/{id}")
     @ResponseBody
     public CharacterDto findAlreadyMadeCharacterById(@PathVariable("id") Long id) {
         return characterService.getCharacterById(id);
     }
 
-    @GetMapping(value = "characters")
+    @GetMapping(value = "/characters")
     @ResponseBody
     public List<CharacterDto> findAllAlreadyMadeCharacter() {
         return characterService.getAllCharacter();
